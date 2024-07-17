@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel= 'stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>RedBus</title>
+ 
+</head>
+<body>
+ <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+	  <div class="modal-content">
+		<div class="modal-header border border-0">
+		  <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Search Buses</h1>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+		  <div class="input-group mb-3">
+			<span class="input-group-text" id="basic-addon1">
+			  <i class='bx bxs-bus fs-3 ms-2'></i>
+			</span>
+			<input type="text" class="form-control" placeholder="From" aria-label="From" aria-describedby="basic-addon1" required  spellcheck="false" id="tags1">
+		  </div>
+		  <div class="input-group mb-3">
+			<span class="input-group-text" id="basic-addon2">
+			  <i class='bx bxs-bus fs-3 ms-2'></i>
+			</span>
+			<input type="text" class="form-control" placeholder="To" aria-label="To" aria-describedby="basic-addon2" id="tags2">
+		  </div>
+		  <div class="input-group mb-3">
+			<span class="input-group-text" id="basic-addon2">
+			  <i class='bx bx-calendar fs-3 ms-2'></i>
+			</span>
+			<input type="date" class="form-control" placeholder="Date" aria-label="To" aria-describedby="basic-addon2">
+		  </div>
+		  
+		</div>
+		<div class="modal-footer border border-0">
+		 
+		  <button type="button" class="btn btn-danger text-white">Search Buses</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+  
+  
+  <div class="container-fluid  position-sticky top-0 z-3 shadow-sm  bg-white menubar">
+		  <div class="container">
+			  <div class="row">
+				  <div class="col-12">
+					  <nav class="navbar navbar-expand-lg">
+						<div class="d-flex">                      
+						  <a class="navbar-brand d-flex align-items-center">
+							  <img src="images/rdc-redbus-logo.webp" class="pointer" alt="" width="80px" height="50px">
+						  </a>
+						  <div class="blank-div d-lg-block d-none">
+							<span class="line-gray"></span>
+						  </div>
+						  <div class="bg-danger rounded px-2 ms-4 d-lg-block d-none">
+							<img src="images/rdc-redbus-logo2.svg" class="d-block mx-auto pt-3 img_rb_vertical pointer" width="30px"/>
+							<p class="text-center text-white pt-1 font--family font-w pointer">Bus Tickets</p>
+						  </div>
+						  <div class="position-relative mx-3 pointer d-lg-block d-none">
+							<img src="images/rail_vertical.svg" class="d-block mx-auto pt-3 filter-img" width="40px"/>
+							<p class="text-center  pt-1 font--family font-w">Train Tickets</p>
+							<span class="position-absolute size-font text-white rounded font--family ">₹80 off</span>
+						  </div>
+						</div>
+						  <button class="navbar-toggler" data-bs-target="#mobileMenu" data-bs-toggle="offcanvas">
+							  <span class="navbar-toggler-icon"></span>
+						  </button>
+	
+						  <div class="collapse navbar-collapse justify-content-end menuItem" >
+							  <ul class="navbar-nav">
+								  <li class="nav-item font--family hover  font-w">
+									  <a href="" class="nav-link px-2 mx-1 rounded text-dark cursor d-flex align-items-center"><i class="fa-solid fa-headphones icon-size"></i>&nbsp;Help</a>
+								  </li>
+								  <li class="nav-item font--family hover  font-w dropdown">
+									  <a href="" class="nav-link rounded position-relative mx-2  px-2 text-dark cursor d-flex align-items-center" data-bs-toggle="dropdown"><i class="fa-regular fa-circle-user icon-size"></i>&nbsp;Account
+										<i class="fa-solid fa-angle-down ms-1"></i>
+									  </a>
+									  
+									  <!--<div class="position-absolute shadow-sm modal-close">-->
+										<ul class="dropdown-menu shadow-sm">
+										  <li class="mt-2"><a class="dropdown-item" href="#">Cancel Ticket</a></li>
+										  <li class="mt-4"><a class="dropdown-item" href="#">Change Travel Date</a></li>
+										  <li class="mt-4"><a class="dropdown-item" href="#">Show My Ticket</a></li>
+										  <li class="mt-4"><a class="dropdown-item" href="#">Email/SMS</a></li>
+										  <li class="mt-4 pt-2"><a class="dropdown-item" href="#">Login/Signup</a></li>
+										</ul>
+									  <!--</div>-->
+								  </li>
+							  </ul>
+						  </div>
+					  </nav>
+				  </div>
+			  </div>
+		  </div>
+  </div> 
+  
+  <!-- mobileMenu -->
+  <div class="offcanvas offcanvas-start custom-offcanvas w-75" tabindex="-1" id="mobileMenu" aria-labelledby="offcanvasExampleLabel">
+	  <div class="offcanvas-header">
+		<img src="images/rdc-redbus-logo.webp" width="70"/>
+		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	  </div>
+	  <div class="offcanvas-body">
+	   <ul class="navbar-nav">
+		 
+		 <li class="nav-item cursor font--family">
+		   <i class="fa-solid fa-user"></i>&nbsp;Sign in/Sign Up
+		 </li>
+		 <li class="nav-item pt-2 cursor font--family" ><a href="index.html" class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal" id="searchBusesLink"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;Search Buses</a></li>
+		 <li class="nav-item pt-1 cursor font--family">
+		   <a href="" class="nav-link" data-bs-toggle="dropdown"><i class="fa-regular fa-star"></i>&nbsp;Offers</a></li>
+		 <li class="nav-item pt-1 cursor font--family">
+		   <a href="study material.html" class="nav-link"><i class="fa-solid fa-circle-info"></i>&nbsp;Help</a> </li>
+		 <li class="nav-item pt-1 cursor font--family">
+		   <a href="blog.html" class="nav-link"><i class="fa-solid fa-file-contract"></i>&nbsp;About Us</a></li>
+		 <li class="nav-item pt-1 cursor font--family">
+		   <a href="" class="nav-link">
+			 <i class="fa-regular fa-rectangle-xmark"></i>&nbsp;Cancel Ticket
+		   </a></li>
+		   <li class="nav-item pt-1 cursor font--family">
+			 <a href="" class="nav-link">
+			   <i class="fa-regular fa-clock"></i>&nbsp;Reschedule Ticket
+		   </a>
+		 </li>
+	   </ul>
+	  </div>
+   </div>
+  
+   <!-- mobileMenu close -->
+ <div class="container-fluid">
+	<div class="row">
+		<div class="col-12 border mb-3" id="stodes">
+			
+		</div>
+	</div>
+	<div class="row">
+			<div class="col-3">
+				<div class="sidebar fs-6 p-3">
+					<h6>FILTERS</h6>
+					<ul class="bottom-border">
+						<li><input type="checkbox" /> Tracking (11)</li>
+						<li><input type="checkbox" /> Primo Bus (9)</li>
+					</ul>
+					<h6>DEPARTURE TIME</h6>
+					<ul>
+						<li><input type="checkbox" /> Before 6 am (0)</li>
+						<li><input type="checkbox" /> 6 am to 12 pm (0)</li>
+						<li><input type="checkbox" /> 12 pm to 6 pm (23)</li>
+						<li><input type="checkbox" /> After 6 pm (1)</li>
+				    </ul>
+					<h6>BUS TYPES</h6>
+					<ul>
+						<li><input type="checkbox" /> SEATER (24)</li>
+						<li><input type="checkbox" /> SLEEPER (1)</li>
+						<li><input type="checkbox" /> AC (15)</li>
+						<li><input type="checkbox" /> NONAC (9)</li>
+					</ul>
+					<h6>SEAT AVAILABILITY</h6>
+					<ul>
+						<li><input type="checkbox" /> Single Seats (1)</li>
+					</ul>
+					<h6>ARRIVAL TIME</h6>
+					<ul>
+						<li><input type="checkbox" /> Before 6 am (1)</li>
+						<li><input type="checkbox" /> 6 am to 12 pm (0)</li>
+						<li><input type="checkbox" /> 12 pm to 6 pm (0)</li>
+						<li><input type="checkbox" /> After 6 pm (23)</li>
+				    </ul>
+				</div>
+			</div>
+			<div class="col-9">
+				<div class="row">
+					<div class="col-8 d-flex gap-5">
+						<div class="buscard">
+							<img src="images/PRIMO_Main.png" alt="" />
+						</div>
+						<div class="buscard">
+							<img src="images/FREEBUS_Main.png" alt=""/>
+						</div>
+						<div class="buscard">
+							<img src="images/RTR_ONWARD_Main.webp" alt="" />
+						</div>
+					</div>
+				</div>
+				<div class="row p-2">
+					<div class="col-4" id="countBuses">
+						
+					</div>
+					<div class="col-1"><span class="htext"><b>SORT BY:</b></span></div>
+					<div class="col-1"><span class="htext">Departure</span></div>
+					<div class="col-1"><span class="htext">Duration</span></div>
+					<div class="col-1"><span class="htext">Arrival</span></div>
+					<div class="col-1"><span class="htext">Ratings</span></div>
+					<div class="col-1"><span class="htext">Fare</span></div>
+					<div class="col-2 text-end"><span class="htext">Seats Available</span></div>
+				</div>
+				<div class="row p-2">
+					<div class="col-12" id="searchBusResult">
+						
+					</div>
+					
+				</div>
+			</div>
+	</div>
+ </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+  let objData=[
+	{
+		code:"ak101",
+		buslogo:"prim0",
+		busname:"SHYAMOLI Pvt. Ltd.(Karunamoyee)",
+		status:"Volvo A/C Seater (2+2)",
+		deptime:"05:20",
+		dplace:"Lower Chelidanga",
+		artime:"09:30",
+		aplace:"Karunamoyee",
+		dtime:"04h 10m",
+		rating:4.4,
+		like:125,
+		price:" 524",
+		savail:"7 Seats available",
+		wavail:"10 Window"
+	},
+	{
+		code:"ak102",
+		buslogo:"",
+		busname:"WBTC (CTC) KARUNAMOYEE - DURGAPUR - ASANSOL (AC Volvo) Banglashree Express - 135|14:10",
+		status:"Volvo A/C Seater (2+2)",
+		deptime:"14:10",
+		dplace:"Chelidanga Asansol",
+		artime:"16:25",
+		aplace:"Burdwan",
+		dtime:"02h 15m",
+		rating:4.3,
+		like:12,
+		price:" 220",
+		savail:"42 Seats available",
+		wavail:"20 Window"
+	},
+
+	{
+		code:"ak101",
+		buslogo:"prim0",
+		busname:"Greenline",
+		status:"Volvo A/C Seater (2+2)",	
+		deptime:"05:30",
+		dplace:"Chelidanga",
+		artime:"09:45",
+		aplace:"Esplanade",
+		dtime:"04h 15m",
+		rating:4.2,
+		like:60,
+		price:" 524",
+		savail:"11 Seats available",
+		wavail:"4 Window"
+	},
+	{
+		code:"ak102",
+		buslogo:"",
+		busname:"Royal Cruiser",
+		status:"Scania Multi-Axle AC Semi Sleeper (2+2)",
+		deptime:"01:00",
+		dplace:"Jubilee Petrol Pump",
+		artime:"03:00",
+		aplace:"Burdwan (Nawabhat)",
+		dtime:"02h 00m",
+		rating:4.0,
+		like:"",
+		price:" 500",
+		savail:"35 Seats available",
+		wavail:""
+	},
+	{
+		code:"ak102",
+		buslogo:"",
+		busname:"SHYAMOLI Pvt. Ltd.(Karunamoyee)",
+		status:"Volvo A/C Seater (2+2)",
+		deptime:"05:10",
+		dplace:"Lower Chelidanga",
+		artime:"07:05",
+		aplace:"Ullash",
+		dtime:"01h 55m",
+		rating:3.8,
+		like:"",
+		price:" 429",
+		savail:"45 Seats available",
+		wavail:""
+	},
+	{
+		code:"ak101",
+		buslogo:"prim0",
+		busname:"Shyamoli Paribahan Pvt Ltd",
+		status:"Volvo A/C Seater (2+2)",
+		deptime:"06:30",
+		dplace:"Lower Chelidanga",
+		artime:"10:45",
+		aplace:"Esplanade",
+		dtime:"04h 15m",
+		rating:4.0,
+		like:60,
+		price:" 524",
+		savail:"3 Seats available",
+		wavail:""
+	},
+	{
+		code:"ak102",
+		buslogo:"",
+		busname:"Express Line (Karunamoyee)",
+		status:"Volvo 9600 Multi Axle Semi-Sleeper (2+2)",
+		deptime:"05:15",
+		dplace:"Lower Chelidanga",
+		artime:"07:05",
+		aplace:"Nawabab Hat",
+		dtime:"02h 00m",
+		rating:4.7,
+		like:"",
+		price:" 429",
+		savail:"53 Seats available",
+		wavail:"26 Window"
+	},
+	{
+		code:"ak101",
+		buslogo:"prim0",
+		busname:"Shyamoli Paribahan Pvt Ltd",
+		status:"Volvo A/C Seater (2+2)",
+		deptime:"07:00",
+		dplace:"Lower Chelidanga",
+		artime:"11:30",
+		aplace:"Esplanade",
+		dtime:"04h 30m",
+		rating:4.4,
+		like:"",
+		price:" 524",
+		savail:"7 Seats available",
+		wavail:""
+	},
+	{
+		code:"ak102",
+		buslogo:"",
+		busname:"SHYAMOLI Pvt. Ltd.(Karunamoyee)",
+		status:"Volvo A/C Seater (2+2)",
+		deptime:"05:20",
+		dplace:"Lower Chelidanga",
+		artime:"07:15",
+		aplace:"Ullash",
+		dtime:"01h 55m",
+		rating:3.8,
+		like:"",
+		price:" 429",
+		savail:"45 Seats available",
+		wavail:""
+	},
+	{
+		code:"ak101",
+		buslogo:"prim0",
+		busname:"SHYAMOLI Pvt. Ltd.(Karunamoyee)",
+		status:"Volvo A/C Seater (2+2)",
+		deptime:"07:45",
+		dplace:"Lower Chelidanga",
+		artime:"12:45",
+		aplace:"Esplanade",
+		dtime:"05h 00m",
+		rating:4.1,
+		like:168,
+		price:" 524",
+		savail:"25 Seats available",
+		wavail:""
+	},
+	{
+		code:"ak101",
+		buslogo:"prim0",
+		busname:"SHYAMOLI Pvt. Ltd.(Karunamoyee)",
+		status:"Volvo A/C Seater (2+2)",
+		deptime:"08:30",
+		dplace:"Lower Chelidanga",
+		artime:"13:30",
+		aplace:"Esplanade",
+		dtime:"05h 00m",
+		rating:4.2,
+		like:151,
+		price:" 524",
+		savail:"18 Seats available",
+		wavail:""
+	}
+
+
+  ]
+  let countBuses=document.querySelector('#countBuses')
+  let stodes=document.querySelector('#stodes')
+  let searchBusResult=document.querySelector('#searchBusResult')
+  let oldUserData=JSON.parse(localStorage.getItem('userdata'))??{}
+  let checkdata=objData.filter((v,i)=>v.code==oldUserData.ucode)
+  console.log(checkdata.length)
+  countBuses.innerHTML=''
+  countBuses.innerHTML+=`
+	<span class="htext"><b>${checkdata.length} Buses</b> found</span>
+  `
+  stodes.innerHTML=''
+  stodes.innerHTML+=`<p class="p-3"><b>${oldUserData.userFrom} <i class="fa-solid fa-arrow-right"></i> ${oldUserData.userTo} <i class="fa-solid fa-arrow-right"></i>${oldUserData.userDate}</b>
+			</p>`
+
+  searchBusResult.innerHTML=''
+  checkdata.forEach((v,i)=>{
+	
+	searchBusResult.innerHTML+=`
+	  <div class="border rounded mt-3 p-1">
+		<div class="row">
+							<div class="col-4">
+								<span class="htext fs-6"><b>${v.busname}</b></span>
+								<p class="htext mt-4">${v.status}</p>
+							</div>
+							<div class="col-1"><span class="htext"></span></div>
+							<div class="col-1">
+								<span class="htext">
+									<b class="fs-5">${v.deptime}</b>
+									<p>${v.dplace}</p>
+								</span>
+
+							</div>
+							<div class="col-1"><span class="htext">${v.dtime}</span></div>
+							<div class="col-1">
+								<span class="htext atime">
+									<b class="fs-5">${v.artime}</b>
+									<p>${v.aplace}</p>
+								</span>
+								
+							</div>
+							<div class="col-1 text-center">
+								<span class="htext">
+									<span class="bg-success text-white p-1"><i class="fa-solid fa-star text-white me-1 mb-1" style="font-size: 12px;"></i></i>${v.rating}</span>
+									<p><i class="fa-regular fa-user mt-2 me-1"></i>${v.like}</p>
+								</span>
+							</div>
+							<div class="col-1"><span class="htext" style="font-size:15px"><b>INR</b>${v.price}</span></div>
+							<div class="col-2 text-end">
+								<span class="htext">
+									${v.savail}
+									<p>${v.wavail}</p>
+								</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12 d-flex justify-content-end align-items-center">
+								<ul class="">
+									<li>Amenities</li>
+									<li>BusPhotos</li>
+									<li>Boarding & Dropping Points</li>
+									<li>Reviews</li>
+									<li> Cancellation Policy</li>
+								</ul>
+								<button>VIEW SEATS</button>
+							</div>
+
+						</div>
+		</div>
+	`
+  })
+  
+</script>
+</html>
